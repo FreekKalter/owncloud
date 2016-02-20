@@ -12,7 +12,7 @@ docker_owncloud_servername ?= localhost
 
 docker_owncloud_mariadb_user ?= owncloud-production
 
-image_owncloud ?= jchaney/owncloud
+image_owncloud ?= freekkalter/owncloud
 image_mariadb  ?= mariadb
 
 .PHONY: default start stop run build build-dev owncloud owncloud-https owncloud-mariadb owncloud-mariadb-get-pw owncloud-mariadb-cli owncloud-production owncloud-dev rm-containers rm-container-tmp-data
@@ -35,7 +35,8 @@ rm-container-tmp-data:
 	rm -rf "$(docker_owncloud_permanent_storage)" "$(docker_owncloud_permanent_storage)-dev" || echo "You need root permissions for this"
 
 build:
-	docker build --no-cache=true --tag $(image_owncloud) .
+	docker build --pull --tag $(image_owncloud) .
+	docker pull $(image_mariadb)
 
 build-dev:
 	docker build --no-cache=false --tag $(image_owncloud) .
