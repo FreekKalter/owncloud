@@ -83,6 +83,7 @@ owncloud-production: owncloud-mariadb
 		--publish $(docker_owncloud_https_port):443 \
 		--volume "$(docker_owncloud_permanent_storage)/data:/var/www/owncloud/data" \
 		--volume "$(docker_owncloud_permanent_storage)/additional_apps:/var/www/owncloud/apps_persistent" \
+		--volume "$(docker_letsencrypt_webroot):/letsencrypt"\
 		--volume "$(docker_owncloud_permanent_storage)/config:/owncloud" \
 		--volume "$(docker_owncloud_ssl_cert):$(docker_owncloud_ssl_cert):ro" \
 		--volume "$(docker_owncloud_ssl_key):$(docker_owncloud_ssl_key):ro" \
